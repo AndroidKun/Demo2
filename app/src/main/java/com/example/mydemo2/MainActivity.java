@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             webView.getSettings().setJavaScriptEnabled(true);
             // 启用 DOM storage API
             webView.getSettings().setDomStorageEnabled(true);
+            webView.getSettings().setDomStorageEnabled(true);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            webView.getSettings().setAllowFileAccess(true);
+            webView.getSettings().setAllowContentAccess(true);
+            webView.getSettings().setLoadsImagesAutomatically(true);
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
