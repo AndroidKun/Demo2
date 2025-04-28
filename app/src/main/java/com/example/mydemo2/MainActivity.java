@@ -1,7 +1,10 @@
 package com.example.mydemo2;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +31,28 @@ public class MainActivity extends AppCompatActivity {
         });
         Log.i("AAA","ch:"+BuildConfig.ch);
         TextView textView = findViewById(R.id.textView);
-        textView.setText(BuildConfig.ch);
+
+        String webUrl = BuildConfig.webUrl;
+        if(!TextUtils.isEmpty(webUrl)){
+            WebView webView = findViewById(R.id.webView);
+            // 启用 JavaScript
+            webView.getSettings().setJavaScriptEnabled(true);
+            // 启用 DOM storage API
+            webView.getSettings().setDomStorageEnabled(true);
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                    Log.e("WebView", "Error: " + description);
+                }
+
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    Log.i("WebView", "Page loaded: " + url);
+                }
+            });
+            webView.loadUrl(webUrl);
+        }
+
+        textView.setText(BuildConfig.ch+"\n"+webUrl);
     }
 }

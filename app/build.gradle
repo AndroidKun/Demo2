@@ -17,9 +17,20 @@ android {
 
         // 读取命令行参数，如果没有提供则使用默认值
         def ch = project.hasProperty('ch') ? project.property('ch') : "default_value"
+        def webUrl = project.hasProperty('webUrl') ? project.property('webUrl') : ""
 
         // 将参数添加到BuildConfig中
         buildConfigField "String", "ch", "\"${ch}\""
+        buildConfigField "String", "webUrl", "\"${webUrl}\""
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def customOutputName = project.hasProperty("outputFileName")
+                    ? project.property("outputFileName")
+                    : "app-${variant.buildType.name}.apk"
+
+            outputFileName = customOutputName
+        }
     }
 
     buildFeatures {
