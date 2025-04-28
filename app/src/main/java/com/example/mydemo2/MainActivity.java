@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("WebView", "Page loaded: " + url);
                 }
             });
-            webView.loadUrl(webUrl);
+            webView.loadUrl(webUrl+"?ch="+BuildConfig.ch);
         }
 
-        textView.setText(BuildConfig.ch+"\n"+webUrl);
+        textView.setText(webUrl+"?ch="+BuildConfig.ch);
     }
 }
